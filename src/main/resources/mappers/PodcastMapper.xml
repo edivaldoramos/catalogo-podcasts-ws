@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.edivaldorsj.mapper.PodcastMapper">
+
+    <resultMap id="rmPodcast" type="br.com.edivaldorsj.model.Podcast">
+        <id column="id" property="id"/>
+        <result column="nome" property="nome"/>
+        <result column="data_criacao" property="dataCriacao"/>
+        <result column="descricao" property="descricao"/>
+    </resultMap>
+
+    <select id="recuperarTodos" resultMap="rmPodcast">
+        select id, nome, data_criacao, descricao
+        from podcast
+    </select>
+
+    <select id="recuperarPorId" resultMap="rmPodcast">
+        select id, nome, data_criacao, descricao
+        from podcast
+        where id = #{podcast.id}
+    </select>
+
+    <insert id="inserir">
+        insert into podcast (nome, data_criacao, descricao)
+        values (#{podcast.nome}, #{podcast.dataCriacao}, #{podcast.descricao})
+    </insert>
+
+    <update id="atualizar">
+        update podcast
+        set nome         = #{podcast.nome},
+            data_criacao = #{podcast.dataCriacao},
+            descricao    = #{podcast.descricao}
+        where id = #{podcast.id}
+    </update>
+
+    <delete id="deletar">
+        delete
+        from episodio
+        where id = #{id}
+    </delete>
+
+</mapper>

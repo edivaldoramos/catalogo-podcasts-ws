@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.edivaldorsj.mapper.IntegranteMapper">
+
+    <resultMap id="rmIntegrante" type="br.com.edivaldorsj.model.Integrante">
+        <id column="id" property="id"/>
+        <result column="nome" property="nome"/>
+        <result column="apelido" property="apelido"/>
+        <result column="sexo" property="sexo"/>
+    </resultMap>
+
+    <select id="recuperarTodos" resultMap="rmIntegrante">
+        select id, nome, apelido, sexo
+        from integrante
+    </select>
+
+    <select id="recuperarPorId" resultMap="rmIntegrante">
+        select id, nome, apelido, sexo
+        from integrante
+        where id = #{id}
+    </select>
+
+    <insert id="inserir">
+        insert into integrante (nome, apelido, sexo)
+        values (#{integrante.nome}, #{integrante.apelido}, #{integrante.sexo})
+    </insert>
+
+    <update id="atualizar">
+        update integrante
+        set nome    = #{integrante.nome},
+            apelido = #{integrante.apelido},
+            sexo    = #{integrante.sexo}
+        where id = #{integrante.id}
+    </update>
+
+    <delete id="deletar">
+        delete
+        from integrante
+        where id = #{id}
+    </delete>
+
+</mapper>

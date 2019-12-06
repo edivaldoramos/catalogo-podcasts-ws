@@ -1,1 +1,13 @@
+spring:
+  application:
+    name: catalogo-podcast-ws
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/catalogo_podcast
+    username: postgres
+    password: postgres
 
+mybatis:
+  type-aliases-package: br.com.edivaldorsj.model
+  type-handlers-package: br.com.edivaldorsj.mapper.typehandler
+  mapper-locations: classpath*:**/mappers/*Mapper.xml

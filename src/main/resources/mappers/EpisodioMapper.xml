@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.edivaldorsj.mapper.EpisodioMapper">
+
+    <resultMap id="rmEpisodio" type="br.com.edivaldorsj.model.Episodio">
+        <id column="id" property="id"/>
+        <result column="sequencia" property="sequencia"/>
+        <result column="titulo" property="titulo"/>
+        <result column="tema" property="tema"/>
+        <result column="data_publicacao" property="dataPublicacao"/>
+        <result column="duracao" property="duracao"/>
+        <result column="descricao" property="descricao"/>
+    </resultMap>
+
+    <select id="recuperarTodos" resultMap="rmEpisodio">
+        select e.id,
+               e.podcast_id,
+               e.sequencia,
+               e.titulo,
+               e.tema,
+               e.data_publicacao,
+               e.duracao,
+               e.descricao,
+               pd.id,
+               pd.nome,
+               i.id,
+               i.nome,
+               i.apelido
+        from episodio e
+                 inner join podcast pd on e.podcast_id = pd.id
+                 inner join participacao pc on e.id = pc.episodio_id
+                 inner join integrante i on pc.integrante_id = i.id
+    </select>
+
+    <select id="recuperarPorId" resultMap="rmEpisodio">
+        select e.id,
+               e.podcast_id,
+               e.sequencia,
+               e.titulo,
+               e.tema,
+               e.data_publicacao,
+               e.duracao,
+               e.descricao,
+               pd.id,
+               pd.nome,
+               i.id,
+               i.nome,
+               i.apelido
+        from episodio e
+                 inner join podcast pd on e.podcast_id = pd.id
+                 inner join participacao pc on e.id = pc.episodio_id
+                 inner join integrante i on pc.integrante_id = i.id
+        where e.id = #{id}
+    </select>
+
+    <insert id="inserir">
+        insert into episodio (podcast_id, sequencia, titulo, tema, data_publicacao, duracao, descricao)
+        values (#{episodio.podcast.id}, #{episodio.sequencia}, #{episodio.titulo}, #{episodio.tema},
+                #{episodio.dataPublicao}, #{episodio.duracao}, #{episodio.descricao})
+    </insert>
+
+    <update id="atualizar">
+        update episodio
+        set podcast_id      = #{episodio.podcast.id},
+            sequencia       = #{episodio.sequencia},
+            titulo          = #{episodio.titulo},
+            tema            = #{episodio.tema},
+            data_publicacao = #{episodio.dataPublicao},
+            duracao         = #{episodio.duracao},
+            descricao       = #{episodio.descricao}
+        where id = #{episodio.id}
+    </update>
+
+    <delete id="deletar">
+        delete
+        from episodio
+        where id = #{id}
+    </delete>
+
+</mapper>
