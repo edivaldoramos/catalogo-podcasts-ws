@@ -10,48 +10,36 @@
         <result column="data_publicacao" property="dataPublicacao"/>
         <result column="duracao" property="duracao"/>
         <result column="descricao" property="descricao"/>
+        <association column="podcast_id" property="podcast"
+                     resultMap="br.com.edivaldorsj.mapper.PodcastMapper.rmPodcast"/>
+        <collection property="convidados" ofType="br.com.edivaldorsj.model.Integrante"
+                    resultMap="br.com.edivaldorsj.mapper.IntegranteMapper.rmIntegrante"/>
     </resultMap>
 
     <select id="recuperarTodos" resultMap="rmEpisodio">
-        select e.id,
-               e.podcast_id,
-               e.sequencia,
-               e.titulo,
-               e.tema,
-               e.data_publicacao,
-               e.duracao,
-               e.descricao,
-               pd.id,
-               pd.nome,
-               i.id,
-               i.nome,
-               i.apelido
-        from episodio e
-                 inner join podcast pd on e.podcast_id = pd.id
-                 inner join participacao pc on e.id = pc.episodio_id
-                 inner join integrante i on pc.integrante_id = i.id
+        select id,
+               podcast_id,
+               sequencia,
+               titulo,
+               tema,
+               data_publicacao,
+               duracao,
+               descricao
+        from episodio
     </select>
 
     <select id="recuperarPorId" resultMap="rmEpisodio">
-        select e.id,
-               e.podcast_id,
-               e.sequencia,
-               e.titulo,
-               e.tema,
-               e.data_publicacao,
-               e.duracao,
-               e.descricao,
-               pd.id,
-               pd.nome,
-               i.id,
-               i.nome,
-               i.apelido
-        from episodio e
-                 inner join podcast pd on e.podcast_id = pd.id
-                 inner join participacao pc on e.id = pc.episodio_id
-                 inner join integrante i on pc.integrante_id = i.id
-        where e.id = #{id}
+        select id,
+               sequencia,
+               titulo,
+               tema,
+               data_publicacao,
+               duracao,
+               descricao
+        from episodio
+        where id = #{id}
     </select>
+
 
     <insert id="inserir">
         insert into episodio (podcast_id, sequencia, titulo, tema, data_publicacao, duracao, descricao)

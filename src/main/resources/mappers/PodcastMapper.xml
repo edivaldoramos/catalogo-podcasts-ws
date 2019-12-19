@@ -17,7 +17,13 @@
     <select id="recuperarPorId" resultMap="rmPodcast">
         select id, nome, data_criacao, descricao
         from podcast
-        where id = #{podcast.id}
+        where id = #{id}
+    </select>
+
+    <select id="recuperarPorNome" resultMap="rmPodcast">
+        select id, nome, data_criacao, descricao
+        from podcast
+        where nome = #{nome}
     </select>
 
     <insert id="inserir">

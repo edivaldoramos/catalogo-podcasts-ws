@@ -8,6 +8,7 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>br.com.edivaldorsj</groupId>
     <artifactId>catalogo-podcast-ws</artifactId>
     <version>0.0.1-SNAPSHOT</version>

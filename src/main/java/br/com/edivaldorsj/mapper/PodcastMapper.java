@@ -16,7 +16,9 @@ public interface PodcastMapper {
 
   void inserir(@Param("podcast") Podcast podcast);
 
-  Podcast recuperarPorId();
+  Podcast recuperarPorId(@Param("id") Long id);
+
+  Podcast recuperarPorNome(@Param("nome") String nome);
 
   List<Podcast> recuperarTodos();
 

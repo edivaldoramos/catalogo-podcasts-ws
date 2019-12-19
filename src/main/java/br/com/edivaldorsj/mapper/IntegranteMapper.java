@@ -16,7 +16,7 @@ public interface IntegranteMapper {
 
   void inserir(@Param("integrante") Integrante integrante);
 
-  Integrante recuperarPorId();
+  Integrante recuperarPorId(@Param("id") Long id);
 
   List<Integrante> recuperarTodos();
 

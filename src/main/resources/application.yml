@@ -1,6 +1,16 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: catalogo-podcast-ws
+    output:
+      ansi:
+        enabled: always
+
+---
+
+spring:
+  profiles: dev
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/catalogo_podcast
@@ -11,3 +21,7 @@ mybatis:
   type-aliases-package: br.com.edivaldorsj.model
   type-handlers-package: br.com.edivaldorsj.mapper.typehandler
   mapper-locations: classpath*:**/mappers/*Mapper.xml
+
+logging:
+  level:
+    br.com.ithappens: INFO

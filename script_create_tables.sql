@@ -2,7 +2,7 @@ create table podcast
 (
     id bigserial not null constraint podcast_pk primary key,
     nome varchar not null,
-    data_criacao timestamp not null,
+    data_criacao date not null,
     descricao varchar
 );
 alter table podcast owner to postgres;
@@ -14,7 +14,7 @@ create table if not exists episodio
     sequencia integer not null,
     titulo varchar not null,
     tema varchar not null,
-    data_publicacao timestamp not null,
+    data_publicacao date not null,
     duracao integer not null,
     descricao varchar
 );
