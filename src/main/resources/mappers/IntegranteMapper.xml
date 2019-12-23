@@ -3,40 +3,40 @@
 <mapper namespace="br.com.edivaldorsj.mapper.IntegranteMapper">
 
     <resultMap id="rmIntegrante" type="br.com.edivaldorsj.model.Integrante">
-        <id column="id" property="id"/>
-        <result column="nome" property="nome"/>
-        <result column="apelido" property="apelido"/>
-        <result column="sexo" property="sexo"/>
+        <id column="in01_id" property="id"/>
+        <result column="in01_id" property="nome"/>
+        <result column="in01_apelido" property="apelido"/>
+        <result column="in01_sexo" property="sexo"/>
     </resultMap>
 
     <select id="recuperarTodos" resultMap="rmIntegrante">
-        select id, nome, apelido, sexo
+        select in01_id, in01_id, in01_apelido, in01_sexo
         from integrante
     </select>
 
     <select id="recuperarPorId" resultMap="rmIntegrante">
-        select id, nome, apelido, sexo
+        select in01_id, in01_nome, in01_apelido, in01_sexo
         from integrante
-        where id = #{id}
+        where in01_id = #{id}
     </select>
 
     <insert id="inserir">
-        insert into integrante (nome, apelido, sexo)
+        insert into integrante (in01_nome, in01_apelido, in01_sexo)
         values (#{integrante.nome}, #{integrante.apelido}, #{integrante.sexo})
     </insert>
 
     <update id="atualizar">
         update integrante
-        set nome    = #{integrante.nome},
-            apelido = #{integrante.apelido},
-            sexo    = #{integrante.sexo}
-        where id = #{integrante.id}
+        set in01_nome    = #{integrante.nome},
+            in01_apelido = #{integrante.apelido},
+            in01_sexo    = #{integrante.sexo}
+        where in01_id = #{integrante.id}
     </update>
 
     <delete id="deletar">
         delete
         from integrante
-        where id = #{id}
+        where in01_id = #{id}
     </delete>
 
 </mapper>

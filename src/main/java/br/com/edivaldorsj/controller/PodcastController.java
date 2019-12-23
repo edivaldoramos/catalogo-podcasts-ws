@@ -2,9 +2,8 @@ package br.com.edivaldorsj.controller;
 
 import br.com.edivaldorsj.model.Podcast;
 import br.com.edivaldorsj.service.IPodcastService;
-import br.com.edivaldorsj.utils.exceptions.IdInvalidoException;
+import br.com.edivaldorsj.utils.exceptions.ParametroInvalidoException;
 import java.util.List;
-import javax.xml.bind.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -24,19 +23,21 @@ public class PodcastController {
   private final IPodcastService podcastService;
 
   @GetMapping(params = "nome")
-  public ResponseEntity<Podcast> recuperarPodcast(@RequestParam("nome") String nome) {
+  public ResponseEntity<Podcast> recuperarPodcast(@RequestParam("nome") String nome) throws ParametroInvalidoException {
     Podcast podcast = podcastService.recuperarPorNome(nome);
     return ResponseEntity.ok(podcast);
   }
 
   @GetMapping(value = "/{id}")
-  public ResponseEntity<Podcast> recuperarPodcastPorId(@PathVariable("id") Long id) throws IdInvalidoException {
-    return ResponseEntity.ok(podcastService.recuperarPorId(id));
+  public ResponseEntity<Podcast> recuperarPodcastPorId(@PathVariable("id") Long id) throws ParametroInvalidoException {
+    Podcast podcast = podcastService.recuperarPorId(id);
+    return ResponseEntity.ok(podcast);
   }
 
   @GetMapping
   public ResponseEntity<List<Podcast>> recuperarTodosPodcasts() {
-    return ResponseEntity.ok(podcastService.recuperarTodos());
+    List<Podcast> podcasts = podcastService.recuperarTodos();
+    return ResponseEntity.ok(podcasts);
   }
 
 }

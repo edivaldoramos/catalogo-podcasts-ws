@@ -5,42 +5,43 @@
     <update id="criarTodasAsTabelas">
         create table if not exists public.podcast
         (
-            id           bigserial not null constraint podcast_pk primary key,
-            nome         varchar   not null,
-            data_criacao timestamp not null,
-            descricao    varchar
+            pd02_id           bigserial not null constraint podcast_pk primary key,
+            pd02_nome         varchar   not null,
+            pd02_data_criacao timestamp not null,
+            pd02_descricao    varchar
         );
         alter table public.podcast
             owner to postgres;
 
         create table if not exists public.integrante
         (
-            id      bigserial not null constraint integrante_pk primary key,
-            nome    varchar   not null,
-            apelido varchar   not null,
-            sexo    char      not null
+            in01_id      bigserial not null constraint integrante_pk primary key,
+            in01_nome    varchar   not null,
+            in01_apelido varchar   not null,
+            in01_sexo    char      not null
         );
         alter table public.integrante
             owner to postgres;
 
         create table if not exists public.episodio
         (
-            id              bigserial not null constraint episodio_pk primary key,
-            podcast_id      bigint    not null constraint episodio_fk references public.podcast,
-            sequencia       integer   not null,
-            titulo          varchar   not null,
-            tema            varchar   not null,
-            data_publicacao timestamp not null,
-            duracao         integer   not null,
-            descricao       varchar
+            ep00_id              bigserial not null constraint episodio_pk primary key,
+            ep00_podcast_id      bigint    not null constraint episodio_fk references public.podcast,
+            ep00_sequencia       integer   not null,
+            ep00_titulo          varchar   not null,
+            ep00_tema            varchar   not null,
+            ep00_data_publicacao timestamp not null,
+            ep00_duracao         integer   not null,
+            ep00_descricao       varchar
         );
-        alter table public.episodio
-            owner to postgres;
+        alter table public.episodio owner to postgres;
 
         create table public.participacao
         (
-            episodio_id   bigint not null constraint participacao_episodio_id_fk references public.episodio,
-            integrante_id bigint not null constraint participacao_integrante_id_fk references public.integrante,
+            episodio_id   bigint not null
+                constraint participacao_episodio_id_fk references public.episodio,
+            integrante_id bigint not null
+                constraint participacao_integrante_id_fk references public.integrante,
             constraint participacao_pk primary key (episodio_id, integrante_id)
         );
         alter table public.participacao

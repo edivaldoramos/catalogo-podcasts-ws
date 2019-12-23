@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,7 @@ import lombok.Data;
 public class Episodio {
 
   private Long             id;
-  private List<Integrante> convidados;
+  private List<Integrante> integrantes;
   private LocalDate        dataPublicacao;
   private String           descricao;
   private Integer          duracao;
@@ -23,7 +24,7 @@ public class Episodio {
   private String           titulo;
 
   public Episodio(){
-    convidados = new ArrayList<>();
+    integrantes = new ArrayList<>();
   }
 
 }

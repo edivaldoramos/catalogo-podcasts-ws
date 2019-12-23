@@ -20,4 +20,6 @@ public interface EpisodioMapper {
 
   List<Episodio> recuperarTodos();
 
+  List<Episodio> recuperarEpisodiosPorCombinacaoDeIntegrantes(@Param("idsIntegrantes") List<Long> idsIntegrantes);
+
 }

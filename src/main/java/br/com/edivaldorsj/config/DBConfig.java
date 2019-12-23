@@ -6,4 +6,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("br.com.edivaldorsj.mapper")
 public class DBConfig {
+
 }

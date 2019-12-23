@@ -2,47 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="br.com.edivaldorsj.mapper.PodcastMapper">
 
-    <resultMap id="rmPodcast" type="br.com.edivaldorsj.model.Podcast">
-        <id column="id" property="id"/>
-        <result column="nome" property="nome"/>
-        <result column="data_criacao" property="dataCriacao"/>
-        <result column="descricao" property="descricao"/>
+    <resultMap id="rmIntegrante" type="br.com.edivaldorsj.model.Integrante">
+        <id property="id" column="in01_id"/>
+        <result property="nome" column="in01_nome"/>
+        <result property="apelido" column="in01_apelido"/>
+        <result property="sexo" column="in01_sexo"/>
     </resultMap>
 
-    <select id="recuperarTodos" resultMap="rmPodcast">
-        select id, nome, data_criacao, descricao
+    <resultMap id="rmEpisodio" type="br.com.edivaldorsj.model.Episodio">
+        <id property="id" column="ep00_id"/>
+        <result property="sequencia" column="ep00_sequencia"/>
+        <result property="titulo" column="ep00_titulo"/>
+        <result property="tema" column="ep00_tema"/>
+        <result property="dataPublicacao" column="ep00_data_publicacao"/>
+        <result property="duracao" column="ep00_duracao"/>
+        <result property="descricao" column="ep00_descricao"/>
+        <result property="podcast.id" column="ep00_podcast_id"/>
+        <collection property="integrantes" ofType="br.com.edivaldorsj.model.Integrante"
+                    resultMap="rmIntegrante"/>
+    </resultMap>
+
+    <resultMap id="rmPodcast" type="br.com.edivaldorsj.model.Podcast">
+        <id property="id" column="pd02_id"/>
+        <result property="nome" column="pd02_nome"/>
+        <result property="dataCriacao" column="pd02_data_criacao"/>
+        <result property="descricao" column="pd02_descricao"/>
+        <collection property="episodios" ofType="br.com.edivaldorsj.model.Episodio" resultMap="rmEpisodio"/>
+    </resultMap>
+
+    <sql id="recuperarPd">
+        select pd02_id,
+               pd02_nome,
+               pd02_data_criacao,
+               pd02_descricao,
+               ep00_id,
+               ep00_sequencia,
+               ep00_titulo,
+               ep00_tema,
+               ep00_data_publicacao,
+               ep00_duracao,
+               ep00_descricao,
+               in01_id,
+               in01_apelido,
+               in01_nome,
+               in01_sexo
         from podcast
+                 inner join episodio on pd02_id = ep00_podcast_id
+                 inner join participacao on ep00_id = pa03_episodio_id
+                 inner join integrante on pa03_integrante_id = in01_id
+    </sql>
+
+    <select id="recuperarTodos" resultMap="rmPodcast">
+        <include refid="recuperarPd"/>
     </select>
 
     <select id="recuperarPorId" resultMap="rmPodcast">
-        select id, nome, data_criacao, descricao
-        from podcast
-        where id = #{id}
+        <include refid="recuperarPd"/>
+        where pd02_id = #{id}
     </select>
 
     <select id="recuperarPorNome" resultMap="rmPodcast">
-        select id, nome, data_criacao, descricao
-        from podcast
-        where nome = #{nome}
+        <include refid="recuperarPd"/>
+        where pd02_nome = #{nome}
     </select>
 
     <insert id="inserir">
-        insert into podcast (nome, data_criacao, descricao)
+        insert into podcast (pd02_nome, pd02_data_criacao, pd02_descricao)
         values (#{podcast.nome}, #{podcast.dataCriacao}, #{podcast.descricao})
     </insert>
 
     <update id="atualizar">
         update podcast
-        set nome         = #{podcast.nome},
-            data_criacao = #{podcast.dataCriacao},
-            descricao    = #{podcast.descricao}
-        where id = #{podcast.id}
+        set pd02_nome         = #{podcast.nome},
+            pd02_data_criacao = #{podcast.dataCriacao},
+            pd02_descricao    = #{podcast.descricao}
+        where pd02_id = #{podcast.id}
     </update>
 
     <delete id="deletar">
         delete
         from episodio
-        where id = #{id}
+        where ep00_id = #{id}
     </delete>
 
 </mapper>

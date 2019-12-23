@@ -24,4 +24,4 @@ mybatis:
 
 logging:
   level:
-    br.com.ithappens: INFO
+    br.com.ithappens: ERROR
