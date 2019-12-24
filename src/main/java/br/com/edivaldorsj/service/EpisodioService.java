@@ -2,8 +2,8 @@ package br.com.edivaldorsj.service;
 
 import br.com.edivaldorsj.mapper.EpisodioMapper;
 import br.com.edivaldorsj.model.Episodio;
+import br.com.edivaldorsj.service.validacao.IEpisodioValidacaoService;
 import br.com.edivaldorsj.utils.exceptions.ParametroInvalidoException;
-import br.com.edivaldorsj.utils.exceptions.RecursoNaoEncontradoException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,18 +15,15 @@ import org.springframework.stereotype.Service;
 public class EpisodioService implements IEpisodioService {
 
   private final EpisodioMapper episodioMapper;
+  private final IEpisodioValidacaoService validacaoService;
 
   @Override
-  public List<Episodio> recuperarEpisodiosPorCombinacaoDeIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException {
-    if (idsIntegrantes.isEmpty()) {
-      throw new ParametroInvalidoException("Os ids dos integrantes passados por parametro são inválidos");
-    }
+  public List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException {
+    validacaoService.validarIdsIntegrantes(idsIntegrantes);
 
-    List<Episodio> episodios = episodioMapper.recuperarEpisodiosPorCombinacaoDeIntegrantes(idsIntegrantes);
+    List<Episodio> episodios = episodioMapper.buscarEpisodiosPorCombinacaoDeIntegrantes(idsIntegrantes);
 
-    if (episodios == null || episodios.isEmpty()){
-      throw new RecursoNaoEncontradoException("Nenhum episodio encontrado para os integrantes passados por parametro");
-    }
+    validacaoService.validarEpisodios(episodios);
 
     return episodios;
   }

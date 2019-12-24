@@ -19,8 +19,8 @@ public class EpisodioController {
   private final IEpisodioService episodioService;
 
   @GetMapping
-  public ResponseEntity<List<Episodio>> recuperarEpisodiosPorCombinacaoDeIntegrantes(@RequestParam("idIntegrante") List<Long> idsIntegrantes) throws ParametroInvalidoException {
-    List<Episodio> episodios = episodioService.recuperarEpisodiosPorCombinacaoDeIntegrantes(idsIntegrantes);
+  public ResponseEntity<List<Episodio>> buscarEpisodiosPorCombinacaoIntegrantes(@RequestParam("idIntegrante") List<Long> idsIntegrantes) throws ParametroInvalidoException {
+    List<Episodio> episodios = episodioService.buscarEpisodiosPorCombinacaoDeIntegrantes(idsIntegrantes);
     return ResponseEntity.ok(episodios);
   }
 

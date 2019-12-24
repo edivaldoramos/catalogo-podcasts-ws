@@ -23,19 +23,19 @@ public class PodcastController {
   private final IPodcastService podcastService;
 
   @GetMapping(params = "nome")
-  public ResponseEntity<Podcast> recuperarPodcast(@RequestParam("nome") String nome) throws ParametroInvalidoException {
+  public ResponseEntity<Podcast> buscarPodcast(@RequestParam("nome") String nome) throws ParametroInvalidoException {
     Podcast podcast = podcastService.recuperarPorNome(nome);
     return ResponseEntity.ok(podcast);
   }
 
   @GetMapping(value = "/{id}")
-  public ResponseEntity<Podcast> recuperarPodcastPorId(@PathVariable("id") Long id) throws ParametroInvalidoException {
+  public ResponseEntity<Podcast> buscarPodcastPorId(@PathVariable("id") Long id) throws ParametroInvalidoException {
     Podcast podcast = podcastService.recuperarPorId(id);
     return ResponseEntity.ok(podcast);
   }
 
   @GetMapping
-  public ResponseEntity<List<Podcast>> recuperarTodosPodcasts() {
+  public ResponseEntity<List<Podcast>> buscarTodosPodcasts() {
     List<Podcast> podcasts = podcastService.recuperarTodos();
     return ResponseEntity.ok(podcasts);
   }

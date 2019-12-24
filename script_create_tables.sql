@@ -1,3 +1,5 @@
+create database catalogo_podcast;
+
 create schema catalogo;
 
 create table ca01_podcast

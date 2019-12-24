@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IEpisodioService {
 
-  List<Episodio> recuperarEpisodiosPorCombinacaoDeIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException;
+  List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException;
 
 }
