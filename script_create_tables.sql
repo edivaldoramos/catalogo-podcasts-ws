@@ -1,7 +1,5 @@
 create database catalogo_podcast;
 
-create schema catalogo;
-
 create table ca01_podcast
 (
     ca01_id bigserial not null constraint podcast_pk primary key,

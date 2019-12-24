@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+public class HttpStatusExceptionHandler extends ResponseEntityExceptionHandler {
 
   private static String tagError  = "error";
   private static String msgPadrao = "Não foi possível efetuar a consulta. Motivo: ";
