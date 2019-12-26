@@ -1,4 +1,4 @@
-### Catalogo Podcast Web Service
+## Catalogo Podcast Web Service
 
 Projeto em construção de uma API RESTFul.
 
@@ -8,11 +8,11 @@ Stack
   - Framework MyBatis para criar consultas customizadas e persistir os dados;
   - Banco da dados PostgreSQL.
 
-## Visão Geral
+#### Visão Geral
 
 A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informacoes sobre podcasts, seus integrantes e episódios.
 
-## Instruções
+#### Instruções
 
 Aqui está o [script] (https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql necessário para a criação das tabelas utilizadas pelo projeto.
 
