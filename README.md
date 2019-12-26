@@ -14,6 +14,6 @@ A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informa
 
 #### Instruções
 
-Aqui está o [script](https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql necessário para a criação das tabelas utilizadas pelo projeto.
+Para criar e povoar as tabelas com informações necessárias para a demonstração do projeto, execute esses metódos de testes [aqui](https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/src/test/java/br/com/edivaldorsj/db/CriadorTabelasTest.java) (na ordem em que foram escritos) ou crie manualmente com os comandos contidos nesse [script](https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql.  
 
 
