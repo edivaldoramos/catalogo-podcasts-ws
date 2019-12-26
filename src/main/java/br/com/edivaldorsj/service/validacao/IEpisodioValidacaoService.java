@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IEpisodioValidacaoService {
 
-  void validarIdsIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException;
-
   void validarEpisodios(List<Episodio> episodios);
+
+  void validarIdsIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException;
 
 }

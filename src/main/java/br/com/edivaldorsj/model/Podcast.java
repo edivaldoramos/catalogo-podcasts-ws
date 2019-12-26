@@ -18,7 +18,7 @@ public class Podcast {
   private List<Episodio> episodios;
   private String         nome;
 
-  public Podcast(){
+  public Podcast() {
     episodios = new ArrayList<>();
   }
 

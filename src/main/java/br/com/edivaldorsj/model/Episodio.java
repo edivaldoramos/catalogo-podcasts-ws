@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -16,16 +15,16 @@ import lombok.NoArgsConstructor;
 public class Episodio {
 
   private Long             id;
-  private List<Integrante> integrantes;
   private LocalDate        dataPublicacao;
   private String           descricao;
   private Integer          duracao;
+  private List<Integrante> integrantes;
   private Podcast          podcast;
   private Long             sequencia;
   private String           tema;
   private String           titulo;
 
-  public Episodio(){
+  public Episodio() {
     integrantes = new ArrayList<>();
   }
 

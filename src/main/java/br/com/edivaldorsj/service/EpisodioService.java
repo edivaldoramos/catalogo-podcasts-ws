@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EpisodioService implements IEpisodioService {
 
-  private final EpisodioMapper episodioMapper;
+  private final EpisodioMapper            episodioMapper;
   private final IEpisodioValidacaoService validacaoService;
 
   @Override

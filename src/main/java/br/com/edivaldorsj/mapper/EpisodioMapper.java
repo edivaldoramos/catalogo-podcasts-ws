@@ -12,6 +12,10 @@ public interface EpisodioMapper {
 
   void atualizar(@Param("episodio") Episodio episodio);
 
+  List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(@Param("idsIntegrantes") List<Long> idsIntegrantes);
+
+  List<Episodio> buscarEpisodiosPorIntegrante(@Param("idIntegrante") Long idIntegrante);
+
   void deletar(@Param("episodio") Long id);
 
   void inserir(@Param("episodio") Episodio episodio);
@@ -19,9 +23,5 @@ public interface EpisodioMapper {
   Episodio recuperarPorId(@Param("id") Long id);
 
   List<Episodio> recuperarTodos();
-
-  List<Episodio> buscarEpisodiosPorIntegrante(@Param("idIntegrante") Long idIntegrante);
-
-  List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(@Param("idsIntegrantes") List<Long> idsIntegrantes);
 
 }

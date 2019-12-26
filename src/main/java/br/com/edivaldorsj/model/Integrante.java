@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Integrante {
 
-  private Long id;
-  private String nome;
-  private String apelido;
+  private Long      id;
+  private String    apelido;
+  private String    nome;
   private Character sexo;
 
 }

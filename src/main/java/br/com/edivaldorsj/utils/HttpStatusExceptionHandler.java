@@ -13,33 +13,29 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class HttpStatusExceptionHandler extends ResponseEntityExceptionHandler {
 
-  private static String tagError  = "error";
-  private static String msgPadrao = "Não foi possível efetuar a consulta. Motivo: ";
-
   @ExceptionHandler(ParametroInvalidoException.class)
   public ResponseEntity<Object> parametroInvalidoException(ParametroInvalidoException e, HttpServletRequest request) {
-    exibirMensagemErro(e.getMessage());
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).header(tagError,
-        msgPadrao + e.getMessage()).build();
+    return construirResponseEntity(HttpStatus.BAD_REQUEST, e.getMessage());
   }
 
-  private void exibirMensagemErro(String mensagem) {
+  private ResponseEntity<Object> construirResponseEntity(HttpStatus httpStatus, String msgErro) {
+    String tagError = "error";
+    String msgPadrao = "Não foi possível efetuar a consulta. Motivo: ";
+
     if (logger.isErrorEnabled()) {
-      logger.error(msgPadrao + mensagem);
+      logger.error(msgPadrao + msgErro);
     }
+    return ResponseEntity.status(httpStatus).header(tagError, msgPadrao + msgErro).build();
   }
 
   @ExceptionHandler(RecursoNaoEncontradoException.class)
   public ResponseEntity<Object> recursoNaoEncontradoException(RecursoNaoEncontradoException e, HttpServletRequest request) {
-    exibirMensagemErro(e.getMessage());
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).header(tagError, e.getMessage()).build();
+    return construirResponseEntity(HttpStatus.NOT_FOUND, e.getMessage());
   }
 
   @ExceptionHandler(ValidationException.class)
-  public ResponseEntity<Object> trowable(Throwable e, HttpServletRequest request) {
-    exibirMensagemErro(e.getMessage());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).header(tagError,
-        msgPadrao + e.getMessage()).build();
+  public ResponseEntity<Object> validationException(Throwable e, HttpServletRequest request) {
+    return construirResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
   }
 
 }
