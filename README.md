@@ -14,6 +14,6 @@ A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informa
 
 #### Instruções
 
-Aqui está o [script] (https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql necessário para a criação das tabelas utilizadas pelo projeto.
+Aqui está o [script](https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql necessário para a criação das tabelas utilizadas pelo projeto.
 
 
