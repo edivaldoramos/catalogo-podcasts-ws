@@ -9,4 +9,6 @@ public interface CriadorTabelasMapper {
 
   void criarTodasAsTabelas();
 
+  void povoarTabelas();
+
 }

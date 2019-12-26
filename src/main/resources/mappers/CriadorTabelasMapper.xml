@@ -3,7 +3,9 @@
 <mapper namespace="br.com.edivaldorsj.mapper.CriadorTabelasMapper">
 
     <update id="criarTodasAsTabelas">
-        create table ca01_podcast
+        create schema catalogo;
+
+        create table catalogo.ca01_podcast
         (
             ca01_id           bigserial not null
                 constraint podcast_pk primary key,
@@ -11,15 +13,17 @@
             ca01_data_criacao date      not null,
             ca01_descricao    varchar
         );
-        alter table ca01_podcast
+        create unique index ca01_integrante_ca01_nome_uindex
+            on catalogo.ca01_podcast (ca01_nome);
+        alter table catalogo.ca01_podcast
             owner to postgres;
 
-        create table if not exists ca02_episodio
+        create table if not exists catalogo.ca02_episodio
         (
             ca02_id              bigserial not null
                 constraint episodio_pk primary key,
             ca02_podcast_id      bigint    not null
-                constraint episodio_fk references ca01_podcast,
+                constraint episodio_fk references catalogo.ca01_podcast,
             ca02_sequencia       integer   not null,
             ca02_titulo          varchar   not null,
             ca02_tema            varchar   not null,
@@ -27,30 +31,114 @@
             ca02_duracao         integer   not null,
             ca02_descricao       varchar
         );
-        alter table ca02_episodio
+        create unique index ca02_integrante_ca02_sequencia_uindex
+            on catalogo.ca02_episodio (ca02_sequencia);
+        create unique index ca02_integrante_ca02_titulo_uindex
+            on catalogo.ca02_episodio (ca02_titulo);
+        alter table catalogo.ca02_episodio
             owner to postgres;
 
-        create table if not exists ca03_integrante
+        create table if not exists catalogo.ca03_integrante
         (
             ca03_id      bigserial not null
                 constraint integrante_pk primary key,
-            ca03_        varchar   not null,
+            ca03_nome    varchar   not null,
             ca03_apelido varchar   not null,
             ca03_sexo    char      not null
         );
-        alter table ca03_integrante
+        create unique index ca03_integrante_ca03_nome_uindex
+            on catalogo.ca03_integrante (ca03_nome);
+        alter table catalogo.ca03_integrante
             owner to postgres;
 
-        create table ca04_participacao
+        create table catalogo.ca04_participacao
         (
             ca04_episodio_id   bigint not null
-                constraint participacao_episodio_id_fk references ca02_episodio,
+                constraint participacao_episodio_id_fk references catalogo.ca02_episodio,
             ca04_integrante_id bigint not null
-                constraint participacao_integrante_id_fk references ca03_integrante,
+                constraint participacao_integrante_id_fk references catalogo.ca03_integrante,
             constraint participacao_pk primary key (ca04_episodio_id, ca04_integrante_id)
         );
-        alter table ca04_participacao
+
+
+        alter table catalogo.ca04_participacao
             owner to postgres;
+    </update>
+
+    <update id="povoarTabelas">
+        --podcasts
+        insert into catalogo.ca01_podcast (ca01_nome, ca01_data_criacao, ca01_descricao)
+        values ('Nerdcast', '2006-04-02', 'Onde o mundo pop vira piada');
+
+        --episodios
+        insert into catalogo.ca02_episodio (ca02_podcast_id, ca02_sequencia, ca02_titulo, ca02_tema,
+                                            ca02_data_publicacao, ca02_duracao, ca02_descricao)
+        values (1, 1, 'Super-Homem: Herói americano ou do mundo?', 'Quadrinhos', '2006-04-02', 13,
+                'Em nosso primeiro programa, 4 nerds (Alottoni, Carlos Voltor, Guinnyn Nightshade e Lady Lark) falam sobre o ícone Super-Homem. Parece que Brian Singer quer acabar com o mito de que Kal-el é um herói tipicamente americano (Quem não se lembra do “Verdade, justiça e meio de vida americano”?), e mostrar neste filme que Super pertence ao mundo. Sem fronteiras, sem bandeiras.');
+        insert into catalogo.ca02_episodio (ca02_podcast_id, ca02_sequencia, ca02_titulo, ca02_tema,
+                                            ca02_data_publicacao, ca02_duracao, ca02_descricao)
+        values (1, 2, 'Batman Continues: Quem serão os vilões? ', 'Quadrinhos', '2006-04-02', 11,
+                'Hoje, os nerds Alottoni, Carlos Voltor, Lady Lark e Guinnyn Nightshade continuam seu papo sem pé nem cabeça sobre os possíveis vilões da continuação de Batman Begins. Quem é o próximo a entrar na roleta de boatos? E quem não vai entrar nunca, mas ficaria ao menos engraçado caracterizado de bat-inimigo?');
+        insert into catalogo.ca02_episodio (ca02_podcast_id, ca02_sequencia, ca02_titulo, ca02_tema,
+                                            ca02_data_publicacao, ca02_duracao, ca02_descricao)
+        values (1, 3, 'Quadrinhos: A volta de Jason Todd (?!)', 'Quadrinhos', '2006-04-02', 21,
+                'Pois é, para os mal informados, Jason Todd (O segundo Robin, assassinado(?) pelo Coringa) entrou para o Hall da Fama da ‘volta dos que não foram’!');
+
+        --integrantes
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Alexandre Ottoni', 'Jovem Nerd', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Deive Pazos', 'Azagual', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Fernando Russel', 'Tucano', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Andreia Duboc', 'Portuguesa', 'F');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Agatha Ottoni', 'Sra. Jovem Nerd', 'F');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Frederico Carstens', 'Sr. K', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('João Paulo Miguel', 'JP', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Tiago La''Marca', 'Rex', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Eduardo Spohr', 'Eduardo Spohr', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Gustavo Mafra', 'Guga Mafra', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Affonso Solano', 'Affonso Solano', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Diogo Braga', 'Didi Braguinha', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Roberto Duque Estrada', 'Beto Estrada', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Leila Germano', 'Leila Germano', 'F');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Lierson Mattenhauer JR', 'Lierson', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Filipe Figueiredo', 'Filipe Figueiredo', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Atila Iamarino', 'Atila Iamarino', 'M');
+        insert into catalogo.ca03_integrante (ca03_nome, ca03_apelido, ca03_sexo)
+        values ('Carlos Voltor', 'Carlos Voltor', 'M');
+
+        --participacoes
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (1, 1);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (1, 18);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (2, 1);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (2, 2);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (3, 1);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (3, 2);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (2, 18);
+        insert into catalogo.ca04_participacao (ca04_episodio_id, ca04_integrante_id)
+        values (3, 18);
     </update>
 
 </mapper>

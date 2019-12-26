@@ -12,7 +12,7 @@ public interface EpisodioMapper {
 
   void atualizar(@Param("episodio") Episodio episodio);
 
-  List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(@Param("idsIntegrantes") List<Long> idsIntegrantes);
+  List<Episodio> buscarEpisodiosPorIntegrantes(@Param("idsIntegrantes") List<Long> idsIntegrantes);
 
   List<Episodio> buscarEpisodiosPorIntegrante(@Param("idIntegrante") Long idIntegrante);
 

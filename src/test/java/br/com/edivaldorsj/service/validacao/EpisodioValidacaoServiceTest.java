@@ -66,7 +66,7 @@ class EpisodioValidacaoServiceTest {
   }
 
   @Test
-  void naoDeveLancarExcecaoQuandoIdodcastForMaiorQueZero() {
+  void naoDeveLancarExcecaoQuandoIdPodcastForMaiorQueZero() {
     List<Episodio> episodios = Arrays.asList(new Episodio());
     assertDoesNotThrow(() -> validacaoService.validarEpisodios(episodios));
   }

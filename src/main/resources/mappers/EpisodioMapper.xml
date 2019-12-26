@@ -70,7 +70,7 @@
         order by ca00_id desc
     </select>
 
-    <select id="buscarEpisodiosPorCombinacaoDeIntegrantes" resultMap="rmEpisodio">
+    <select id="buscarEpisodiosPorIntegrantes" resultMap="rmEpisodio">
         <include refid="sqlBaseBuscarEpisodiosIntegrante"/>
         where ca03_integrante_id in
         <foreach item="id" collection="idsIntegrantes" separator="," open="(" close=")">

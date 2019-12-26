@@ -26,19 +26,19 @@ class EpisodioServiceTest {
   @Test
   void deveInvocarMetodoDeEpisodioMapperUmaUnicaVez() throws ParametroInvalidoException {
     List<Long> ids = Arrays.asList(1L, 2L);
-    episodioService.buscarEpisodiosPorCombinacaoDeIntegrantes(ids);
-    verify(episodioMapper, times(1)).buscarEpisodiosPorCombinacaoDeIntegrantes(ids);
+    episodioService.buscarEpisodiosPorIntegrantes(ids);
+    verify(episodioMapper, times(1)).buscarEpisodiosPorIntegrantes(ids);
   }
 
   @Test
   void deveSeguirOrdemDefinidaDosMetodosDuranteAcaoDeBusca() throws ParametroInvalidoException {
     List<Long> ids = Arrays.asList(1L, 2L);
 
-    episodioService.buscarEpisodiosPorCombinacaoDeIntegrantes(ids);
+    episodioService.buscarEpisodiosPorIntegrantes(ids);
 
     InOrder ordemChamadas = inOrder(episodioMapper, validacaoService);
     ordemChamadas.verify(validacaoService).validarIdsIntegrantes(ids);
-    ordemChamadas.verify(episodioMapper).buscarEpisodiosPorCombinacaoDeIntegrantes(ids);
+    ordemChamadas.verify(episodioMapper).buscarEpisodiosPorIntegrantes(ids);
     ordemChamadas.verify(validacaoService).validarEpisodios(anyList());
 
     verifyNoMoreInteractions(episodioMapper);

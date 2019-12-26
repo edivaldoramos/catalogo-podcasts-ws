@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class HttpStatusExceptionHandler extends ResponseEntityExceptionHandler {
+public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(ParametroInvalidoException.class)
   public ResponseEntity<Object> parametroInvalidoException(ParametroInvalidoException e, HttpServletRequest request) {

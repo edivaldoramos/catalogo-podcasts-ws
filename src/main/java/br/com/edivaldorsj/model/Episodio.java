@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Episodio {
 

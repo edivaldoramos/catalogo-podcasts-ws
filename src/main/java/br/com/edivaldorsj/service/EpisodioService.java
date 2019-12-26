@@ -18,10 +18,10 @@ public class EpisodioService implements IEpisodioService {
   private final IEpisodioValidacaoService validacaoService;
 
   @Override
-  public List<Episodio> buscarEpisodiosPorCombinacaoDeIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException {
+  public List<Episodio> buscarEpisodiosPorIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException {
     validacaoService.validarIdsIntegrantes(idsIntegrantes);
 
-    List<Episodio> episodios = episodioMapper.buscarEpisodiosPorCombinacaoDeIntegrantes(idsIntegrantes);
+    List<Episodio> episodios = episodioMapper.buscarEpisodiosPorIntegrantes(idsIntegrantes);
 
     validacaoService.validarEpisodios(episodios);
 

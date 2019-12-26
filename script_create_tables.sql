@@ -10,6 +10,8 @@ create table catalogo.ca01_podcast
     ca01_data_criacao date      not null,
     ca01_descricao    varchar
 );
+create unique index ca01_integrante_ca01_nome_uindex
+    on catalogo.ca01_podcast (ca01_nome);
 alter table catalogo.ca01_podcast
     owner to postgres;
 
@@ -26,6 +28,10 @@ create table if not exists catalogo.ca02_episodio
     ca02_duracao         integer   not null,
     ca02_descricao       varchar
 );
+create unique index ca02_integrante_ca02_sequencia_uindex
+    on catalogo.ca02_episodio (ca02_sequencia);
+create unique index ca02_integrante_ca02_titulo_uindex
+    on catalogo.ca02_episodio (ca02_titulo);
 alter table catalogo.ca02_episodio
     owner to postgres;
 
@@ -33,10 +39,12 @@ create table if not exists catalogo.ca03_integrante
 (
     ca03_id      bigserial not null
         constraint integrante_pk primary key,
-    ca03_        varchar   not null,
+    ca03_nome    varchar   not null,
     ca03_apelido varchar   not null,
     ca03_sexo    char      not null
 );
+create unique index ca03_integrante_ca03_nome_uindex
+    on catalogo.ca03_integrante (ca03_nome);
 alter table catalogo.ca03_integrante
     owner to postgres;
 
@@ -48,5 +56,6 @@ create table catalogo.ca04_participacao
         constraint participacao_integrante_id_fk references catalogo.ca03_integrante,
     constraint participacao_pk primary key (ca04_episodio_id, ca04_integrante_id)
 );
+
 alter table catalogo.ca04_participacao
     owner to postgres;
