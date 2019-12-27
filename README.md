@@ -2,16 +2,16 @@
 
 Projeto em construção de uma API RESTFul.
 
-Stack
+Stack do projeto
   - Escrito em Java 8;
-  - Utilizei as facilidades do Spring Boot;
+  - Utilizando as facilidades do Spring Boot;
   - Lombok na classes para evitar o boilerplate do java;
   - Framework MyBatis para criar consultas customizadas e persistir os dados;
-  - Banco da dados PostgreSQL.
+  - Banco de dados PostgreSQL.
 
 #### Visão Geral
 
-A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informacoes sobre podcasts, seus integrantes e episódios.
+A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informacoes sobre podcasts, seus integrantes e episódios. 
 
 #### Instruções
 
