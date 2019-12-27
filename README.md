@@ -3,8 +3,9 @@
 Projeto em construção de uma API RESTFul.
 
 Stack
-  - Escrito em Java 8 usando as facilidades do Spring Boot;
-  - Lombok na classes java para evitar boilerplate;
+  - Escrito em Java 8;
+  - Utilizei as facilidades do Spring Boot;
+  - Lombok na classes para evitar o boilerplate do java;
   - Framework MyBatis para criar consultas customizadas e persistir os dados;
   - Banco da dados PostgreSQL.
 
