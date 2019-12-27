@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="br.com.edivaldorsj.mapper.CriadorTabelasMapper">
+<mapper namespace="br.com.edivaldoramos.mapper.CriadorTabelasMapper">
 
-    <update id="criarTodasAsTabelas">
+    <update id="criarTabelas">
         create schema catalogo;
 
         create table catalogo.ca01_podcast
@@ -59,7 +59,6 @@
                 constraint participacao_integrante_id_fk references catalogo.ca03_integrante,
             constraint participacao_pk primary key (ca04_episodio_id, ca04_integrante_id)
         );
-
 
         alter table catalogo.ca04_participacao
             owner to postgres;

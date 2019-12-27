@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="br.com.edivaldorsj.mapper.EpisodioMapper">
+<mapper namespace="br.com.edivaldoramos.mapper.EpisodioMapper">
 
-    <resultMap id="rmEpisodio" type="br.com.edivaldorsj.model.Episodio">
+    <resultMap id="rmEpisodio" type="br.com.edivaldoramos.model.Episodio">
         <id column="ca00_id" property="id"/>
         <result column="ca00_sequencia" property="sequencia"/>
         <result column="ca00_titulo" property="titulo"/>
@@ -10,12 +10,12 @@
         <result column="ca00_data_publicacao" property="dataPublicacao"/>
         <result column="ca00_duracao" property="duracao"/>
         <result column="ca00_descricao" property="descricao"/>
-        <association property="podcast" javaType="br.com.edivaldorsj.model.Podcast">
+        <association property="podcast" javaType="br.com.edivaldoramos.model.Podcast">
             <id property="id" column="ca00_podcast_id"/>
             <result property="nome" column="ca02_nome"/>
         </association>
-        <collection property="integrantes" ofType="br.com.edivaldorsj.model.Integrante"
-                    resultMap="br.com.edivaldorsj.mapper.IntegranteMapper.rmIntegrante"/>
+        <collection property="integrantes" ofType="br.com.edivaldoramos.model.Integrante"
+                    resultMap="br.com.edivaldoramos.mapper.IntegranteMapper.rmIntegrante"/>
     </resultMap>
 
     <select id="recuperarTodos" resultMap="rmEpisodio">

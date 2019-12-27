@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="br.com.edivaldorsj.mapper.PodcastMapper">
+<mapper namespace="br.com.edivaldoramos.mapper.PodcastMapper">
 
-    <resultMap id="rmIntegrante" type="br.com.edivaldorsj.model.Integrante">
+    <resultMap id="rmIntegrante" type="br.com.edivaldoramos.model.Integrante">
         <id property="id" column="ca01_id"/>
         <result property="nome" column="ca01_nome"/>
         <result property="apelido" column="ca01_apelido"/>
         <result property="sexo" column="ca01_sexo"/>
     </resultMap>
 
-    <resultMap id="rmEpisodio" type="br.com.edivaldorsj.model.Episodio">
+    <resultMap id="rmEpisodio" type="br.com.edivaldoramos.model.Episodio">
         <id property="id" column="ca00_id"/>
         <result property="sequencia" column="ca00_sequencia"/>
         <result property="titulo" column="ca00_titulo"/>
@@ -18,16 +18,16 @@
         <result property="duracao" column="ca00_duracao"/>
         <result property="descricao" column="ca00_descricao"/>
         <result property="podcast.id" column="ca00_podcast_id"/>
-        <collection property="integrantes" ofType="br.com.edivaldorsj.model.Integrante"
+        <collection property="integrantes" ofType="br.com.edivaldoramos.model.Integrante"
                     resultMap="rmIntegrante"/>
     </resultMap>
 
-    <resultMap id="rmPodcast" type="br.com.edivaldorsj.model.Podcast">
+    <resultMap id="rmPodcast" type="br.com.edivaldoramos.model.Podcast">
         <id property="id" column="ca02_id"/>
         <result property="nome" column="ca02_nome"/>
         <result property="dataCriacao" column="ca02_data_criacao"/>
         <result property="descricao" column="ca02_descricao"/>
-        <collection property="episodios" ofType="br.com.edivaldorsj.model.Episodio" resultMap="rmEpisodio"/>
+        <collection property="episodios" ofType="br.com.edivaldoramos.model.Episodio" resultMap="rmEpisodio"/>
     </resultMap>
 
     <sql id="recuperarPd">
