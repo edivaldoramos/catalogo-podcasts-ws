@@ -3,53 +3,53 @@
 <mapper namespace="br.com.edivaldoramos.mapper.PodcastMapper">
 
     <resultMap id="rmIntegrante" type="br.com.edivaldoramos.model.Integrante">
-        <id property="id" column="ca01_id"/>
-        <result property="nome" column="ca01_nome"/>
-        <result property="apelido" column="ca01_apelido"/>
-        <result property="sexo" column="ca01_sexo"/>
+        <id property="id" column="in_id"/>
+        <result property="nome" column="in_nome"/>
+        <result property="apelido" column="in_apelido"/>
+        <result property="sexo" column="in_sexo"/>
     </resultMap>
 
     <resultMap id="rmEpisodio" type="br.com.edivaldoramos.model.Episodio">
-        <id property="id" column="ca00_id"/>
-        <result property="sequencia" column="ca00_sequencia"/>
-        <result property="titulo" column="ca00_titulo"/>
-        <result property="tema" column="ca00_tema"/>
-        <result property="dataPublicacao" column="ca00_data_publicacao"/>
-        <result property="duracao" column="ca00_duracao"/>
-        <result property="descricao" column="ca00_descricao"/>
-        <result property="podcast.id" column="ca00_podcast_id"/>
+        <id property="id" column="ep_id"/>
+        <result property="sequencia" column="ep_sequencia"/>
+        <result property="titulo" column="ep_titulo"/>
+        <result property="tema" column="ep_tema"/>
+        <result property="dataPublicacao" column="ep_data_publicacao"/>
+        <result property="duracao" column="ep_duracao"/>
+        <result property="descricao" column="ep_descricao"/>
+        <result property="podcast.id" column="ep_podcast_id"/>
         <collection property="integrantes" ofType="br.com.edivaldoramos.model.Integrante"
                     resultMap="rmIntegrante"/>
     </resultMap>
 
     <resultMap id="rmPodcast" type="br.com.edivaldoramos.model.Podcast">
-        <id property="id" column="ca02_id"/>
-        <result property="nome" column="ca02_nome"/>
-        <result property="dataCriacao" column="ca02_data_criacao"/>
-        <result property="descricao" column="ca02_descricao"/>
+        <id property="id" column="pd_id"/>
+        <result property="nome" column="pd_nome"/>
+        <result property="dataCriacao" column="pd_data_criacao"/>
+        <result property="descricao" column="pd_descricao"/>
         <collection property="episodios" ofType="br.com.edivaldoramos.model.Episodio" resultMap="rmEpisodio"/>
     </resultMap>
 
     <sql id="recuperarPd">
-        select ca02_id,
-               ca02_nome,
-               ca02_data_criacao,
-               ca02_descricao,
-               ca00_id,
-               ca00_sequencia,
-               ca00_titulo,
-               ca00_tema,
-               ca00_data_publicacao,
-               ca00_duracao,
-               ca00_descricao,
-               ca01_id,
-               ca01_apelido,
-               ca01_nome,
-               ca01_sexo
-        from ca02_podcast
-                 inner join ca00_episodio on ca02_id = ca00_podcast_id
-                 inner join ca03_participacao on ca00_id = ca03_episodio_id
-                 inner join ca01_integrante on ca03_integrante_id = ca01_id
+        select pd_id,
+               pd_nome,
+               pd_data_criacao,
+               pd_descricao,
+               ep_id,
+               ep_sequencia,
+               ep_titulo,
+               ep_tema,
+               ep_data_publicacao,
+               ep_duracao,
+               ep_descricao,
+               in_id,
+               in_apelido,
+               in_nome,
+               in_sexo
+        from pd_podcast
+                 inner join ep_episodio on ep_podcast_id = pd_id
+                 inner join pa_participacao on pa_episodio_id = ep_id
+                 inner join in_integrante on pa_integrante_id = in_id
     </sql>
 
     <select id="recuperarTodos" resultMap="rmPodcast">
@@ -58,31 +58,31 @@
 
     <select id="recuperarPorId" resultMap="rmPodcast">
         <include refid="recuperarPd"/>
-        where ca02_id = #{id}
+        where pd_id = #{id}
     </select>
 
     <select id="recuperarPorNome" resultMap="rmPodcast">
         <include refid="recuperarPd"/>
-        where ca02_nome = #{nome}
+        where pd_nome = #{nome}
     </select>
 
     <insert id="inserir">
-        insert into ca02_podcast (ca02_nome, ca02_data_criacao, ca02_descricao)
+        insert into pd_podcast (pd_nome, pd_data_criacao, pd_descricao)
         values (#{podcast.nome}, #{podcast.dataCriacao}, #{podcast.descricao})
     </insert>
 
     <update id="atualizar">
-        update ca02_podcast
-        set ca02_nome         = #{podcast.nome},
-            ca02_data_criacao = #{podcast.dataCriacao},
-            ca02_descricao    = #{podcast.descricao}
-        where ca02_id = #{podcast.id}
+        update pd_podcast
+        set pd_nome         = #{podcast.nome},
+            pd_data_criacao = #{podcast.dataCriacao},
+            pd_descricao    = #{podcast.descricao}
+        where in_id = #{podcast.id}
     </update>
 
     <delete id="deletar">
         delete
-        from ca02_podcast
-        where ca02_id = #{id}
+        from pd_podcast
+        where pd_id = #{id}
     </delete>
 
 </mapper>

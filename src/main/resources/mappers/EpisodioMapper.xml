@@ -3,15 +3,15 @@
 <mapper namespace="br.com.edivaldoramos.mapper.EpisodioMapper">
 
     <resultMap id="rmEpisodio" type="br.com.edivaldoramos.model.Episodio">
-        <id column="ca00_id" property="id"/>
-        <result column="ca00_sequencia" property="sequencia"/>
-        <result column="ca00_titulo" property="titulo"/>
-        <result column="ca00_tema" property="tema"/>
-        <result column="ca00_data_publicacao" property="dataPublicacao"/>
-        <result column="ca00_duracao" property="duracao"/>
-        <result column="ca00_descricao" property="descricao"/>
+        <id column="ca02_id" property="id"/>
+        <result column="ca02_sequencia" property="sequencia"/>
+        <result column="ca02_titulo" property="titulo"/>
+        <result column="ca02_tema" property="tema"/>
+        <result column="ca02_data_publicacao" property="dataPublicacao"/>
+        <result column="ca02_duracao" property="duracao"/>
+        <result column="ca02_descricao" property="descricao"/>
         <association property="podcast" javaType="br.com.edivaldoramos.model.Podcast">
-            <id property="id" column="ca00_podcast_id"/>
+            <id property="id" column="ca02_podcast_id"/>
             <result property="nome" column="ca02_nome"/>
         </association>
         <collection property="integrantes" ofType="br.com.edivaldoramos.model.Integrante"
@@ -19,38 +19,38 @@
     </resultMap>
 
     <select id="recuperarTodos" resultMap="rmEpisodio">
-        select ca00_id,
-               ca00_podcast_id,
-               ca00_sequencia,
-               ca00_titulo,
-               ca00_tema,
-               ca00_data_publicacao,
-               ca00_duracao,
-               ca00_descricao
-        from ca00_episodio
+        select ca02_id,
+               ca02_podcast_id,
+               ca02_sequencia,
+               ca02_titulo,
+               ca02_tema,
+               ca02_data_publicacao,
+               ca02_duracao,
+               ca02_descricao
+        from ca02_episodio
     </select>
 
     <select id="recuperarPorId" resultMap="rmEpisodio">
-        select ca00_id,
-               ca00_sequencia,
-               ca00_titulo,
-               ca00_tema,
-               ca00_data_publicacao,
-               ca00_duracao,
-               ca00_descricao
-        from ca00_episodio
-        where ca00_id = #{id}
+        select ca02_id,
+               ca02_sequencia,
+               ca02_titulo,
+               ca02_tema,
+               ca02_data_publicacao,
+               ca02_duracao,
+               ca02_descricao
+        from ca02_episodio
+        where ca02_id = #{id}
     </select>
 
     <sql id="sqlBaseBuscarEpisodiosIntegrante">
-        select distinct ca00_id,
-                        ca00_sequencia,
-                        ca00_titulo,
-                        ca00_tema,
-                        ca00_data_publicacao,
-                        ca00_duracao,
-                        ca00_descricao,
-                        ca00_podcast_id,
+        select distinct ca02_id,
+                        ca02_sequencia,
+                        ca02_titulo,
+                        ca02_tema,
+                        ca02_data_publicacao,
+                        ca02_duracao,
+                        ca02_descricao,
+                        ca02_podcast_id,
                         ca02_nome,
                         ca02_id,
                         ca02_nome,
@@ -58,16 +58,16 @@
                         ca02_descricao,
                         ca01_id,
                         ca01_apelido
-        from ca00_episodio
-                 inner join ca03_participacao on ca00_id = ca03_episodio_id
-                 inner join ca02_podcast on ca00_podcast_id = ca02_id
+        from ca02_episodio
+                 inner join ca03_participacao on ca02_id = ca03_episodio_id
+                 inner join ca02_podcast on ca02_podcast_id = ca02_id
                  inner join ca01_integrante on ca03_integrante_id = ca01_id
     </sql>
 
     <select id="buscarEpisodiosPorIntegrante" resultMap="rmEpisodio">
         <include refid="sqlBaseBuscarEpisodiosIntegrante"/>
         where ca03_integrante_id = #{idIntegrante}
-        order by ca00_id desc
+        order by ca02_id desc
     </select>
 
     <select id="buscarEpisodiosPorIntegrantes" resultMap="rmEpisodio">
@@ -76,32 +76,32 @@
         <foreach item="id" collection="idsIntegrantes" separator="," open="(" close=")">
             #{id}
         </foreach>
-        order by ca00_id desc
+        order by ca02_id desc
     </select>
 
     <insert id="inserir">
-        insert into ca00_episodio (ca00_podcast_id, ca00_sequencia, ca00_titulo, ca00_tema, ca00_data_publicacao,
-                                   ca00_duracao, ca00_descricao)
+        insert into ca02_episodio (ca02_podcast_id, ca02_sequencia, ca02_titulo, ca02_tema, ca02_data_publicacao,
+                                   ca02_duracao, ca02_descricao)
         values (#{episodio.podcast.id}, #{episodio.sequencia}, #{episodio.titulo}, #{episodio.tema},
                 #{episodio.dataPublicao}, #{episodio.duracao}, #{episodio.descricao})
     </insert>
 
     <update id="atualizar">
-        update ca00_episodio
-        set ca00_podcast_id      = #{episodio.podcast.id},
-            ca00_sequencia       = #{episodio.sequencia},
-            ca00_titulo          = #{episodio.titulo},
-            ca00_tema            = #{episodio.tema},
-            ca00_data_publicacao = #{episodio.dataPublicao},
-            ca00_duracao         = #{episodio.duracao},
-            ca00_descricao       = #{episodio.descricao}
-        where ca00_id = #{episodio.id}
+        update ca02_episodio
+        set ca02_podcast_id      = #{episodio.podcast.id},
+            ca02_sequencia       = #{episodio.sequencia},
+            ca02_titulo          = #{episodio.titulo},
+            ca02_tema            = #{episodio.tema},
+            ca02_data_publicacao = #{episodio.dataPublicao},
+            ca02_duracao         = #{episodio.duracao},
+            ca02_descricao       = #{episodio.descricao}
+        where ca02_id = #{episodio.id}
     </update>
 
     <delete id="deletar">
         delete
-        from ca00_episodio
-        where ca00_id = #{id}
+        from ca02_episodio
+        where ca02_id = #{id}
     </delete>
 
 </mapper>

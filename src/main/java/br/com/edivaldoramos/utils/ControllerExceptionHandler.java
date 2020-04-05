@@ -3,7 +3,7 @@ package br.com.edivaldoramos.utils;
 import br.com.edivaldoramos.utils.exceptions.ParametroInvalidoException;
 import br.com.edivaldoramos.utils.exceptions.RecursoNaoEncontradoException;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ValidationException;
+import javax.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

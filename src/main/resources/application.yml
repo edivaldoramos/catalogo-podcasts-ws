@@ -1,8 +1,11 @@
+server:
+  port: 8089
+
 spring:
   profiles:
     active: dev
   application:
-    name: catalogo-podcast-ws
+    name: podcast-ws
 
 ---
 
@@ -10,7 +13,7 @@ spring:
   profiles: dev
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/catalogo_podcast
+    url: jdbc:postgresql://db:5432/podcasts
     username: postgres
     password: postgres
 
@@ -18,7 +21,3 @@ mybatis:
   type-aliases-package: br.com.edivaldorsj.model
   type-handlers-package: br.com.edivaldorsj.mapper.typehandler
   mapper-locations: classpath*:**/mappers/*Mapper.xml
-
-logging:
-  level:
-    br.com.ithappens: ERROR
