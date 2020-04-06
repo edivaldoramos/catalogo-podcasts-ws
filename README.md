@@ -1,6 +1,6 @@
 ## Podcast Web Service
 
-Projeto de uma API RESTFul.
+Projeto de demonstração de uma API RESTFul.
 
 Stack do projeto:
   - Escrito em Java 8;
