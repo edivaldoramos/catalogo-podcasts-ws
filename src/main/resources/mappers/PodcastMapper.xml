@@ -46,42 +46,42 @@
                in_apelido,
                in_nome,
                in_sexo
-        from pd_podcast
-                 inner join ep_episodio on ep_podcast_id = pd_id
-                 inner join pa_participacao on pa_episodio_id = ep_id
-                 inner join in_integrante on pa_integrante_id = in_id
+        from podcast
+                 inner join episodio on ep_podcast_id = pd_id
+                 inner join participacao on pa_episodio_id = ep_id
+                 inner join integrante on pa_integrante_id = in_id
     </sql>
 
-    <select id="recuperarTodos" resultMap="rmPodcast">
+    <select id="buscarTodos" resultMap="rmPodcast">
         <include refid="recuperarPd"/>
     </select>
 
-    <select id="recuperarPorId" resultMap="rmPodcast">
+    <select id="buscarPorId" resultMap="rmPodcast">
         <include refid="recuperarPd"/>
         where pd_id = #{id}
     </select>
 
-    <select id="recuperarPorNome" resultMap="rmPodcast">
+    <select id="buscarPorNome" resultMap="rmPodcast">
         <include refid="recuperarPd"/>
         where pd_nome = #{nome}
     </select>
 
     <insert id="inserir">
-        insert into pd_podcast (pd_nome, pd_data_criacao, pd_descricao)
+        insert into podcast (pd_nome, pd_data_criacao, pd_descricao)
         values (#{podcast.nome}, #{podcast.dataCriacao}, #{podcast.descricao})
     </insert>
 
     <update id="atualizar">
-        update pd_podcast
+        update podcast
         set pd_nome         = #{podcast.nome},
             pd_data_criacao = #{podcast.dataCriacao},
             pd_descricao    = #{podcast.descricao}
-        where in_id = #{podcast.id}
+        where pd_id = #{podcast.id}
     </update>
 
     <delete id="deletar">
         delete
-        from pd_podcast
+        from podcast
         where pd_id = #{id}
     </delete>
 

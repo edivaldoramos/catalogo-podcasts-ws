@@ -3,40 +3,40 @@
 <mapper namespace="br.com.edivaldoramos.mapper.IntegranteMapper">
 
     <resultMap id="rmIntegrante" type="br.com.edivaldoramos.model.Integrante">
-        <id column="ca01_id" property="id"/>
-        <result column="ca01_id" property="nome"/>
-        <result column="ca01_apelido" property="apelido"/>
-        <result column="ca01_sexo" property="sexo"/>
+        <id column="in_id" property="id"/>
+        <result column="in_id" property="nome"/>
+        <result column="in_apelido" property="apelido"/>
+        <result column="in_sexo" property="sexo"/>
     </resultMap>
 
     <select id="recuperarTodos" resultMap="rmIntegrante">
-        select ca01_id, ca01_id, ca01_apelido, ca01_sexo
-        from ca01_integrante
+        select in_id, in_id, in_apelido, in_sexo
+        from integrante
     </select>
 
     <select id="recuperarPorId" resultMap="rmIntegrante">
-        select ca01_id, ca01_nome, ca01_apelido, ca01_sexo
-        from ca01_integrante
-        where ca01_id = #{id}
+        select in_id, in_nome, in_apelido, in_sexo
+        from integrante
+        where in_id = #{id}
     </select>
 
     <insert id="inserir">
-        insert into ca01_integrante (ca01_nome, ca01_apelido, ca01_sexo)
+        insert into integrante (in_nome, in_apelido, in_sexo)
         values (#{integrante.nome}, #{integrante.apelido}, #{integrante.sexo})
     </insert>
 
     <update id="atualizar">
-        update ca01_integrante
-        set ca01_nome    = #{integrante.nome},
-            ca01_apelido = #{integrante.apelido},
-            ca01_sexo    = #{integrante.sexo}
-        where ca01_id = #{integrante.id}
+        update integrante
+        set in_nome    = #{integrante.nome},
+            in_apelido = #{integrante.apelido},
+            in_sexo    = #{integrante.sexo}
+        where in_id = #{integrante.id}
     </update>
 
     <delete id="deletar">
         delete
-        from ca01_integrante
-        where ca01_id = #{id}
+        from integrante
+        where in_id = #{id}
     </delete>
 
 </mapper>

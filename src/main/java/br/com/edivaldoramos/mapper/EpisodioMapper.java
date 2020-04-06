@@ -20,8 +20,10 @@ public interface EpisodioMapper {
 
   void inserir(@Param("episodio") Episodio episodio);
 
-  Episodio recuperarPorId(@Param("id") Long id);
+  Episodio buscarPorId(@Param("id") Long id);
 
-  List<Episodio> recuperarTodos();
+  List<Episodio> buscarTodos();
+
+  List<Episodio> buscarPorTema(String tema);
 
 }

@@ -16,10 +16,10 @@ public interface PodcastMapper {
 
   void inserir(@Param("podcast") Podcast podcast);
 
-  Podcast recuperarPorId(@Param("id") Long id);
+  Podcast buscarPorId(@Param("id") Long id);
 
-  Podcast recuperarPorNome(@Param("nome") String nome);
+  Podcast buscarPorNome(@Param("nome") String nome);
 
-  List<Podcast> recuperarTodos();
+  List<Podcast> buscarTodos();
 
 }

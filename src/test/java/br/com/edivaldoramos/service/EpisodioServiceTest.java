@@ -24,7 +24,7 @@ class EpisodioServiceTest {
   private IEpisodioValidacaoService validacaoService;
 
   @Test
-  void deveInvocarMetodoDeEpisodioMapperUmaUnicaVez() throws ParametroInvalidoException {
+  void deveBuscarEpisodiosPorIntegrantesUmaUnicaVez() throws ParametroInvalidoException {
     List<Long> ids = Arrays.asList(1L, 2L);
     episodioService.buscarEpisodiosPorIntegrantes(ids);
     verify(episodioMapper, times(1)).buscarEpisodiosPorIntegrantes(ids);

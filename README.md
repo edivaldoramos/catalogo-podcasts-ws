@@ -1,30 +1,38 @@
-## Catalogo Podcast Web Service
+## Podcast Web Service
 
-Projeto em construção de uma API RESTFul.
+Projeto de uma API RESTFul.
 
-Stack do projeto
+Stack do projeto:
   - Escrito em Java 8;
-  - Utilizando as facilidades do Spring Boot;
-  - Lombok na classes para evitar o boilerplate do java;
-  - Framework MyBatis para criar consultas customizadas e persistir os dados;
-  - Banco de dados PostgreSQL.
+  - Spring Boot com suas facilidades;
+  - Lombok para evitar o boilerplate do java;
+  - Framework MyBatis para criação de consultas customizadas e persistência os dados;
+  - Banco de dados PostgreSQL;
+  - Testes unitários com JUnit 5 e Mockito;
+  - Testes server-side com MockMVC;
+  - Conteinerização de aplicação com Docker;
+  - Orquestração de containers com Docker Compose. 
 
 #### Visão Geral
 
-A aplicaçao tem como objetivo disponibilizar endpoints para consulta de informacoes sobre podcasts, seus integrantes e episódios. 
+A aplicação tem como objetivo disponibilizar endpoints para consulta de informações sobre podcasts, seus integrantes e episódios. 
 
-#### Instruções
+#### Inicialização da aplicação e sua base de dados
 
-Para criar e povoar as tabelas com informações necessárias para a demonstração do projeto, execute esses metódos de testes [aqui](https://github.com/edivaldoramos/catalogo-podcasts-ws/blob/master/src/test/java/br/com/edivaldoramos/db/CriadorTabelasTest.java) (na ordem em que foram escritos) ou crie manualmente com os comandos contidos nesse [script](https://github.com/edivaldorsj/catalogo-podcasts-ws/blob/master/script_create_tables.sql) sql.  
+Execute o comando `docker-compose up` no diretório raiz do projeto. <br/><br/>Durante a inicialização dos containers, será executao um [script]() para criar o banco de dados, além de criar e povoar as tabelas necessárias para o funcionamento da aplicação.   
 
-##### Endpoints: 
+#### Endpoints
 
-- Recuperar por lista de integrantes:
-  - `http://localhost:8080/episodios?idIntegrante=1,2`
+- Buscar podcasts: 
+  - `http://localhost:8089/podcasts/`
+  - `http://localhost:8089/podcasts/1`
+  - `http://localhost:8089/podcasts?nome=Nerdcast`
 
-- Recuperar podcasts: 
-  - `http://localhost:8080/podcasts/`
-  - `http://localhost:8080/podcasts/1`
-  - `http://localhost:8080/podcasts?nome=Nerdcast`
+- Buscar episodios:
+  - `http://localhost:8089/episodios/1`
+  - `http://localhost:8089/episodios/`
+  - `http://localhost:8089/episodios?tema=Quadrinhos`
+
+
 
 

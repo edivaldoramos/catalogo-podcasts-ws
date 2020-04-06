@@ -20,24 +20,24 @@ public class PodcastService implements IPodcastService {
   private final IPodcastValidacaoService validacaoService;
 
   @Override
-  public Podcast recuperarPorId(Long id) throws ParametroInvalidoException {
+  public Podcast buscarPorId(Long id) throws ParametroInvalidoException {
     validacaoService.validarIdPodcast(id);
 
-    return Optional.ofNullable(podcastMapper.recuperarPorId(id))
+    return Optional.ofNullable(podcastMapper.buscarPorId(id))
         .orElseThrow(() -> new RecursoNaoEncontradoException("Nenhum resultado para o id passado por parametro."));
   }
 
   @Override
-  public Podcast recuperarPorNome(String nome) throws ParametroInvalidoException {
+  public Podcast buscarPorNome(String nome) throws ParametroInvalidoException {
     validacaoService.validarNomePodcast(nome);
 
-    return Optional.ofNullable(podcastMapper.recuperarPorNome(nome))
+    return Optional.ofNullable(podcastMapper.buscarPorNome(nome))
         .orElseThrow(() -> new RecursoNaoEncontradoException("Nenhum resultado para o nome passado por parametro."));
   }
 
   @Override
-  public List<Podcast> recuperarTodos() {
-    return podcastMapper.recuperarTodos();
+  public List<Podcast> buscarTodos() {
+    return podcastMapper.buscarTodos();
   }
 
 }

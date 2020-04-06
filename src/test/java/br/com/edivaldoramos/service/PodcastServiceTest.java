@@ -26,28 +26,28 @@ class PodcastServiceTest {
   private IPodcastValidacaoService validacaoService;
 
   @Test
-  void deveInvocarUmaUnicaVezRecuperarTodosDoMapper() {
-    podcastService.recuperarTodos();
-    verify(podcastMapper, times(1)).recuperarTodos();
+  void deveInvocarRecuperarTodosUmaUnicaVez() {
+    podcastService.buscarTodos();
+    verify(podcastMapper, times(1)).buscarTodos();
     verifyNoMoreInteractions(podcastMapper);
   }
 
   @Test
   void deveLancarRecursoNaoEncontradoExceptionQuandoABuscaPorIdNaoPossuirResultados() {
-    when(podcastMapper.recuperarPorId(1L)).thenReturn(null);
+    when(podcastMapper.buscarPorId(1L)).thenReturn(null);
 
     RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class,
-        () -> podcastService.recuperarPorId(1L));
+        () -> podcastService.buscarPorId(1L));
 
     assertEquals("Nenhum resultado para o id passado por parametro.", exception.getMessage());
   }
 
   @Test
   void deveLancarRecursoNaoEncontradoExceptionQuandoABuscaPorNomeNaoPossuirResultados() {
-    when(podcastMapper.recuperarPorNome("podcast")).thenReturn(null);
+    when(podcastMapper.buscarPorNome("podcast")).thenReturn(null);
 
     RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class,
-        () -> podcastService.recuperarPorNome("podcast"));
+        () -> podcastService.buscarPorNome("podcast"));
 
     assertEquals("Nenhum resultado para o nome passado por parametro.", exception.getMessage());
   }
@@ -57,13 +57,13 @@ class PodcastServiceTest {
     Long id = 1L;
     Podcast podcast = new Podcast();
 
-    when(podcastMapper.recuperarPorId(id)).thenReturn(podcast);
+    when(podcastMapper.buscarPorId(id)).thenReturn(podcast);
 
-    podcastService.recuperarPorId(id);
+    podcastService.buscarPorId(id);
 
     InOrder ordemChamadas = inOrder(validacaoService, podcastMapper);
     ordemChamadas.verify(validacaoService).validarIdPodcast(id);
-    ordemChamadas.verify(podcastMapper).recuperarPorId(id);
+    ordemChamadas.verify(podcastMapper).buscarPorId(id);
 
     verifyNoMoreInteractions(validacaoService);
     verifyNoMoreInteractions(podcastMapper);
@@ -74,12 +74,12 @@ class PodcastServiceTest {
     String nome = "podcast";
     Podcast podcast = new Podcast();
 
-    when(podcastMapper.recuperarPorNome(nome)).thenReturn(podcast);
-    podcastService.recuperarPorNome(nome);
+    when(podcastMapper.buscarPorNome(nome)).thenReturn(podcast);
+    podcastService.buscarPorNome(nome);
 
     InOrder ordemChamadas = inOrder(validacaoService, podcastMapper);
     ordemChamadas.verify(validacaoService).validarNomePodcast(nome);
-    ordemChamadas.verify(podcastMapper).recuperarPorNome(nome);
+    ordemChamadas.verify(podcastMapper).buscarPorNome(nome);
 
     verifyNoMoreInteractions(validacaoService);
     verifyNoMoreInteractions(podcastMapper);

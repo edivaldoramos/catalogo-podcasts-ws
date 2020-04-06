@@ -8,4 +8,10 @@ public interface IEpisodioService {
 
   List<Episodio> buscarEpisodiosPorIntegrantes(List<Long> idsIntegrantes) throws ParametroInvalidoException;
 
+  Episodio buscarEpisodiosPorId(Long id);
+
+  List<Episodio> buscarEpisodiosPorTema(String tema);
+
+  List<Episodio> buscarTodos();
+
 }

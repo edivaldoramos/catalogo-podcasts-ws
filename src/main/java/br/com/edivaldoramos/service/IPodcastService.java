@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface IPodcastService {
 
-  Podcast recuperarPorId(Long id) throws ParametroInvalidoException;
+  Podcast buscarPorId(Long id) throws ParametroInvalidoException;
 
-  Podcast recuperarPorNome(String nome) throws ParametroInvalidoException;
+  Podcast buscarPorNome(String nome) throws ParametroInvalidoException;
 
-  List<Podcast> recuperarTodos();
+  List<Podcast> buscarTodos();
 
 }

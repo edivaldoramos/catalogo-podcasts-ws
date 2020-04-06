@@ -17,25 +17,25 @@ class PodcastControllerTest {
   private IPodcastService   podcastService;
 
   @Test
-  void deveInvocarMetodoRecuperarPorIdDaClasseDeServicoUmaUnicaVezDuranteABusca() throws ParametroInvalidoException {
+  void deveInvocarBuscarPodcastPorIdUmaUnicaVez() throws ParametroInvalidoException {
     Long id = 1L;
     podcastController.buscarPodcastPorId(id);
-    verify(podcastService, times(1)).recuperarPorId(id);
+    verify(podcastService, times(1)).buscarPorId(id);
     verifyNoMoreInteractions(podcastService);
   }
 
   @Test
-  void deveInvocarMetodoRecuperarPorNomeDaClasseDeServicoUmaUnicaVezDuranteABusca() throws ParametroInvalidoException {
+  void deveInvocarBuscarPodcastPorNomeUmaUnicaVez() throws ParametroInvalidoException {
     String nome = "podcast";
     podcastController.buscarPodcastPorNome(nome);
-    verify(podcastService, times(1)).recuperarPorNome(nome);
+    verify(podcastService, times(1)).buscarPorNome(nome);
     verifyNoMoreInteractions(podcastService);
   }
 
   @Test
-  void deveInvocarMetodoRecuperarTodosDaClasseDeServicoUmaUnicaVezDuranteABusca() throws ParametroInvalidoException {
+  void deveInvocarBuscarTodosPodcastsUmaUnicaVez() {
     podcastController.buscarTodosPodcasts();
-    verify(podcastService, times(1)).recuperarTodos();
+    verify(podcastService, times(1)).buscarTodos();
     verifyNoMoreInteractions(podcastService);
   }
 

@@ -28,4 +28,19 @@ public class EpisodioService implements IEpisodioService {
     return episodios;
   }
 
+  @Override
+  public Episodio buscarEpisodiosPorId(Long id) {
+    return episodioMapper.buscarPorId(id);
+  }
+
+  @Override
+  public List<Episodio> buscarEpisodiosPorTema(String tema) {
+    return episodioMapper.buscarPorTema(tema);
+  }
+
+  @Override
+  public List<Episodio> buscarTodos() {
+    return episodioMapper.buscarTodos();
+  }
+
 }
