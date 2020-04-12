@@ -19,9 +19,9 @@ A aplicação tem como objetivo disponibilizar endpoints para consulta de inform
 
 #### Inicialização da aplicação e sua base de dados
 
-Execute o comando `docker-compose up` no diretório raiz do projeto. <br/><br/>Durante a inicialização dos containers, será executao um [script]() para criar o banco de dados, além de criar e povoar as tabelas necessárias para o funcionamento da aplicação.   
+Execute o comando `docker-compose up` no diretório raiz do projeto. <br/><br/>Durante a inicialização dos containers, um [script](https://github.com/edivaldoramos/podcast-ws/blob/master/scripts/init.sql) será executado, efetuando assim, a criação do banco de dados e suas tabelas, bem como o povoamento das tabelas com dados necessários para o funcionamento da aplicação.  
 
-#### Endpoints
+#### Endpoints de teste da API
 
 - Buscar podcasts: 
   - `http://localhost:8089/podcasts/`
