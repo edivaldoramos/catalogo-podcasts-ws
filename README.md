@@ -1,4 +1,4 @@
-## Podcast Web Service
+## Podcast Web Service Demo
 
 Projeto de demonstração de uma API RESTFul.
 
