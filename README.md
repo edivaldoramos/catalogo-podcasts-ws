@@ -5,6 +5,7 @@ Projeto de demonstração de uma API RESTFul.
 Stack do projeto:
   - Escrito em Java 8;
   - Spring Boot com suas facilidades;
+  - Interceptação de exceções com @ControllerAdvice
   - Lombok para evitar o boilerplate do java;
   - Framework MyBatis para criação de consultas customizadas e persistência os dados;
   - Banco de dados PostgreSQL;
@@ -35,4 +36,4 @@ Execute o comando `docker-compose up` no diretório raiz do projeto. <br/><br/>D
 
 #### Próximos passos
 
-Aumentar cobertura de testes.
+Aumentar cobertura de testes unitários
